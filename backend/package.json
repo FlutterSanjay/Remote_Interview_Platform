@@ -17,6 +17,7 @@
     "express": "^5.2.1",
     "inngest": "^3.51.0",
     "mongoose": "^9.1.6",
-    "remoteinterview": "file:.."
+    "remoteinterview": "file:..",
+    "stream-chat": "^9.31.0"
   }
 }
