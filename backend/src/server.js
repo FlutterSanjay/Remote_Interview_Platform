@@ -3,8 +3,11 @@ import { ENV } from "./helper/env.js";
 import { serve } from "inngest/express";
 import { inngest, functions } from "./config/inngest.js";
 import path from "path";
+import chatRoutes from "./routes/chatRoutes.js";
 import cors from "cors";
 import connectDB from "./config/db.js";
+import { clerkMiddleware } from "@clerk/express";
+import { protectRoute } from "./middleware/protectRoute.js";
 const app = express();
 
 const __dirname = path.resolve();
@@ -12,11 +15,18 @@ const __dirname = path.resolve();
 // Middlewares
 app.use(express.json());
 app.use(cors({ origin: ENV.CLIENT_URL, credentials: true }));
-
-
+app.use(clerkMiddleware()); // this add auth field to request object: req.auth()
 
 app.use("/api/inngest", serve({ client: inngest, functions }));
+app.use("/api/chat", chatRoutes);
 
+app.get("/health", (req, res) => {
+  req.auth;
+  res.status(200).json({ message: "Server is healthy" });
+});
+
+
+  
 //make our app ready for deployment
 if (ENV.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../frontend/dist")));
