@@ -4,6 +4,7 @@ import { serve } from "inngest/express";
 import { inngest, functions } from "./config/inngest.js";
 import path from "path";
 import chatRoutes from "./routes/chatRoutes.js";
+import sessionRoutes from "./routes/sessionRoutes.js";
 import cors from "cors";
 import connectDB from "./config/db.js";
 import { clerkMiddleware } from "@clerk/express";
@@ -19,6 +20,7 @@ app.use(clerkMiddleware()); // this add auth field to request object: req.auth()
 
 app.use("/api/inngest", serve({ client: inngest, functions }));
 app.use("/api/chat", chatRoutes);
+app.use("/api/session", sessionRoutes);
 
 app.get("/health", (req, res) => {
   req.auth;
