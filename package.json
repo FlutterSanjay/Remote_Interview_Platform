@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/FlutterSanjay/Remote_Interview_Platform/issues"
   },
-  "homepage": "https://github.com/FlutterSanjay/Remote_Interview_Platform#readme"
+  "homepage": "https://github.com/FlutterSanjay/Remote_Interview_Platform#readme",
+  "dependencies": {
+    "@stream-io/node-sdk": "^0.7.40"
+  }
 }
