@@ -4,6 +4,7 @@ import HomePage from "./pages/HomePage";
 
 import DashboardPage from "./pages/DashboardPage";
 import ProblemsPage from "./pages/ProblemsPage";
+import ProblemPage from "./pages/ProblemPage";
 
 const App = () => {
   const { isSignedIn, isLoaded } = useUser();
@@ -23,6 +24,10 @@ const App = () => {
       <Route
         path="/problem"
         element={isSignedIn ? <ProblemsPage /> : <Navigate to="/" />}
+      />
+      <Route
+        path="/problems/:id"
+        element={isSignedIn ? <ProblemPage /> : <Navigate to={"/"} />}
       />
     </Routes>
   );
