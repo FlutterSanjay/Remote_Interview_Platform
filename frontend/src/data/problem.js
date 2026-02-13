@@ -4,11 +4,31 @@ export const PROBLEMS = {
     title: "Sliding Window Maximum",
     difficulty: "Hard",
     category: "Deque • Monotonic Queue",
-    description: { text: "Return max in each sliding window.", notes: [] },
+    description: {
+      text: "Return max in each sliding window.",
+      notes: [
+        "Brute force O(n*k) checks every window → TLE for large input.",
+        "We need a data structure that always keeps the maximum at the front.",
+        "Use a Monotonic Decreasing Deque (stores indices, not values).",
+        "Deque invariant: values are always in decreasing order.",
+        "Front of deque = maximum element of current window.",
+        "Remove indices that go out of window (i - k).",
+        "While inserting new element, pop smaller elements from back.",
+        "Each element is pushed and popped at most once → O(n) time.",
+        "This is a standard 'Sliding Window + Monotonic Queue' pattern.",
+        "Very similar pattern used in: Daily Temperatures, Next Greater Element, Stock Span.",
+      ],
+    },
     examples: [
       { input: "nums=[1,3,-1,-3,5,3,6,7], k=3", output: "[3,3,5,5,6,7]" },
+      { input: "nums=[4,2,12,11], k=1", output: "[4,2,12,11]" },
+      { input: "nums=[-4,-2,-5,-1], k=2", output: "[-2,-2,-1]" },
     ],
-    constraints: [],
+    constraints: [
+      "1 ≤ nums.length ≤ 10^5",
+      "-10^4 ≤ nums[i] ≤ 10^4",
+      "1 ≤ k ≤ nums.length",
+    ],
     starterCode: {
       javascript: `function maxSlidingWindow(nums,k){}`,
       python: `def maxSlidingWindow(nums,k):
@@ -28,7 +48,18 @@ export const PROBLEMS = {
     category: "Two Pointers • Stack",
     description: {
       text: "Compute how much water it can trap after raining.",
-      notes: [],
+      notes: [
+        "Water above a bar depends on min(maxLeft, maxRight) − height[i].",
+        "Brute force calculates left & right max for every index → O(n²).",
+        "Better approach: precompute prefix max and suffix max arrays → O(n) space.",
+        "Optimal solution uses Two Pointers with O(1) space.",
+        "Move pointer with smaller height because water level depends on smaller boundary.",
+        "Maintain leftMax and rightMax while traversing.",
+        "If height[left] < height[right], process left side; else process right side.",
+        "Add trapped water whenever current height < respective max boundary.",
+        "Stack solution also possible — treats bars as valley boundaries.",
+        "Classic pattern: bounded by taller bars on both sides.",
+      ],
     },
     examples: [{ input: "height=[0,1,0,2,1,0,1,3,2,1,2,1]", output: "6" }],
     constraints: ["n ≤ 2 * 10⁴"],
@@ -48,7 +79,18 @@ export const PROBLEMS = {
     category: "Tree • Design",
     description: {
       text: "Design an algorithm to serialize and deserialize a binary tree.",
-      notes: [],
+      notes: [
+        "Serialization converts tree → string; deserialization reconstructs tree.",
+        "Must preserve structure, not just values.",
+        "Use BFS (level order) or DFS (preorder) traversal.",
+        "Store null nodes explicitly to rebuild shape correctly.",
+        "Without null markers, multiple trees produce same traversal.",
+        "Preorder + null markers is most common approach.",
+        "During deserialization, rebuild nodes recursively in same order.",
+        "Queue is useful for BFS reconstruction.",
+        "Time complexity O(n) for both serialize and deserialize.",
+        "This is a classic 'encode structure + decode using same traversal' design problem.",
+      ],
     },
     examples: [
       { input: "root=[1,2,3,null,null,4,5]", output: "[1,2,3,null,null,4,5]" },

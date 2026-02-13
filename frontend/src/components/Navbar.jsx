@@ -30,7 +30,7 @@ const Navbar = () => {
         <div className="flex items-center gap-1">
           <Link
             to={"/problems"}
-            className={`px-4 py-2.5 rounded-lg transition-all duration-200 ${isActive("/problems") ? "bg-primary text-primary-content" : "hover:bg-base-200 text-base-content/70 hover:text-base-content"}`}
+            className={`px-4 py-2.5 rounded-lg transition-all duration-200 ${isActive("/problem") ? "bg-primary text-primary-content" : "hover:bg-base-200 text-base-content/70 hover:text-base-content"}`}
           >
             <div className="flex items-center gap-x-2.5">
               <BookOpenIcon className="size-4" />
