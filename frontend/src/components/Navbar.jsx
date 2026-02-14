@@ -2,8 +2,10 @@ import { Link, useLocation } from "react-router-dom";
 import { BookOpenIcon, LayoutDashboardIcon, Sparkles } from "lucide-react";
 import { UserButton } from "@clerk/clerk-react";
 
+
 const Navbar = () => {
   const location = useLocation();
+
 
   const isActive = (path) => location.pathname === path;
   return (
@@ -29,7 +31,7 @@ const Navbar = () => {
         {/* PROBLEM PART */}
         <div className="flex items-center gap-1">
           <Link
-            to={"/problems"}
+            to={"/problem"}
             className={`px-4 py-2.5 rounded-lg transition-all duration-200 ${isActive("/problem") ? "bg-primary text-primary-content" : "hover:bg-base-200 text-base-content/70 hover:text-base-content"}`}
           >
             <div className="flex items-center gap-x-2.5">
