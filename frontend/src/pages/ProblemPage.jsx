@@ -197,7 +197,7 @@ const ProblemPage = () => {
           <Panel defaultSize={60} minSize={30}>
             <PanelGroup direction="vertical">
               {/* Top panel - Code editor */}
-              <Panel defaultSize={70} minSize={30}>
+              <Panel defaultSize={60} minSize={30}>
                 <CodeEditorPanel
                   selectedLanguage={selectedLanguage}
                   code={code}
@@ -208,7 +208,7 @@ const ProblemPage = () => {
                 />
               </Panel>
               <PanelResizeHandle className="h-2 bg-base-300 hover:bg-primary transition-colors cursor-row-resize" />
-              <Panel defaultSize={30} minSize={30}>
+              <Panel defaultSize={40} minSize={30}>
                 <OutputPanel output={output} />
               </Panel>
             </PanelGroup>
