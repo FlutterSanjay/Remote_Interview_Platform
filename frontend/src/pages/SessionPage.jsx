@@ -10,7 +10,12 @@ import {
 import { PROBLEMS } from "../data/problems";
 import { executeCode } from "../lib/piston";
 import Navbar from "../components/Navbar.jsx";
-import { Key, Loader2Icon, LogOutIcon, Outdent } from "lucide-react";
+import { Key, Loader2Icon, LogOutIcon, Outdent, PhoneOffIcon } from "lucide-react";
+import useStreamClient from "../hooks/useStreamClient.js";
+import { StreamCall, StreamVideoClient } from "@stream-io/node-sdk";
+import { getDifficultyBadgeClass } from "../lib/utils.js";
+import VideoCallUI from "../components/VideoCallUI.jsx";
+
 
 const SessionPage = () => {
   const navigate = useNavigate();
@@ -31,6 +36,8 @@ const SessionPage = () => {
   const session = sessionData?.session;
   const isParticipant = session?.participant?.clerkId === user?.id;
   const isHost = session?.host?.clerkId === user?.id;
+
+  const {call,channel,chatClient,isInitializingCall,streamClient } =useStreamClient(session,loadingSession,isHost,isParticipant)
 
   // find the problem data based on session problem title
 
@@ -246,9 +253,39 @@ const SessionPage = () => {
             </PanelGroup>
           </Panel>
           <PanelResizeHandle className="w-2 bg-base-300 hover:bg-primary transition-colors cursor-col-resize" />
-          {/* Right Panel */}
+          {/* Right Panel- Video Calls & Chat */}
           <Panel defaultSize={50} minSize={30}>
-            Video Calling Panael
+            <div className="h-full bg-base-200 p-4 overflow-auto">
+              {isInitializingCall ? (
+                <div className="h-full flex items-center justify-center">
+                  <div className="text-center">
+                    <Loader2Icon className="size-12 mx-auto animate-spin text-primary mb-4" />
+                    <p className="text-lg">Connecting to video call...</p>
+                  </div>
+              </div>
+              ) : !streamClient || !call ?(
+                <div className="h-full flex items-center justify-center">
+                  <div className="card bg-base-100 shadow-xl max-w-md">
+                    <div className="card-body items-center text-center">
+                      <div className="w-24 h-24 bg-error/10 rounded-full flex items-center justify-center mb-4">
+                        <PhoneOffIcon className="size-12 text-error"/>
+                      </div>
+                      <h2 className="card-title text-2xl">Connection Filed</h2>
+                      <p className="text-base-content/70">Unable to connect to the video call</p>
+                    </div>
+                  </div>
+                </div>
+                ) : (
+                    <div className="h-full">
+                      <StreamVideo client={streamClient}>
+                        <StreamCall call={call}>
+                          <VideoCallUI chatClient={chatClient} channel={channel} />
+                        </StreamCall>
+
+                      </StreamVideo>
+                    </div>
+              )}
+           </div>
           </Panel>
         </PanelGroup>
       </div>
