@@ -71,7 +71,7 @@ const VideoCallUI = ({ chatClient, channel }) => {
       {/* Chat Section */}
       {chatClient && channel && (
         <div
-          className={`flex flex-col toundedlg shadow overflow-hidden bg-[#272a30] transition-all duration-300 ease-in-out ${
+          className={`flex flex-col rounded-lg shadow overflow-hidden bg-[#272a30] transition-all duration-300 ease-in-out ${
             isChatOpen ? "w-80 opacity-100" : "w-0 opacity-0"
           }`}
         >
@@ -88,17 +88,15 @@ const VideoCallUI = ({ chatClient, channel }) => {
                 </button>
               </div>
               <div className="flex-1 overflow-hidden stream-chat-dark">
-                <div className={chatClient}>
-                  <Chat client={channel} theme="str-chat__theme-dark">
-                    <Channel channel={channel}>
-                      <Window>
-                        <MessageList />
-                        <MessageInput />
-                      </Window>
-                      <Thread />
-                    </Channel>
-                  </Chat>
-                </div>
+                <Chat client={chatClient} theme="str-chat__theme-dark">
+                  <Channel channel={channel}>
+                    <Window>
+                      <MessageList />
+                      <MessageInput />
+                    </Window>
+                    <Thread />
+                  </Channel>
+                </Chat>
               </div>
             </>
           )}

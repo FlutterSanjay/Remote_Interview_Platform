@@ -1,4 +1,3 @@
-import { StreamCall } from "@stream-io/node-sdk";
 import { chatClient, streamClient } from "../config/stream.js";
 import Session from "../model/Session.js";
 
@@ -167,14 +166,14 @@ const endSession = async (req, res) => {
     }
 
     // delete stream video call
-    const call = StreamCall.video.call("default", session.callId);
+    const call = streamClient.video.call("default", session.callId);
     await call.delete({ hard: true });
 
     //delete stream chat channel
     const channel = chatClient.channel("messaging", session.callId);
     await channel.delete();
 
-    session.status == "completed";
+    session.status = "completed";
     await session.save();
 
     res.status(200).json({ session, message: "Session ended successfully" });

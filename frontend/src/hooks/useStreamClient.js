@@ -71,7 +71,7 @@ const useStreamClient = ({
 
     // cleanup - performance reasons
     return () => {
-      async () => {
+      (async () => {
         try {
           if (videoCall) await videoCall.leave();
           if (chatClientInstance) await chatClientInstance.disconnectUser();
@@ -79,7 +79,7 @@ const useStreamClient = ({
         } catch (error) {
           console.error("Cleanup error:", error);
         }
-      };
+      })();
     };
   }, [session, loadingSession, isHost, isParticipant]);
 
@@ -90,7 +90,6 @@ const useStreamClient = ({
     channel,
     isInitializingCall,
   };
-  return <div></div>;
 };
 
 export default useStreamClient;

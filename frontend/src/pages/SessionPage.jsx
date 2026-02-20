@@ -1,20 +1,22 @@
 import { useUser } from "@clerk/clerk-react";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import { Panel, PanelGroup, PanelResizeHandle,OutputPanel } from "react-resizable-panels";
+import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 import {
   useEndSession,
   useJoinSession,
   useSessionById,
 } from "../hooks/useSessions.js";
-import { PROBLEMS } from "../data/problems";
+import { PROBLEMS } from "../data/problem.js";
 import { executeCode } from "../lib/piston";
 import Navbar from "../components/Navbar.jsx";
-import { Key, Loader2Icon, LogOutIcon, Outdent, PhoneOffIcon } from "lucide-react";
+import { Loader2Icon, LogOutIcon, PhoneOffIcon } from "lucide-react";
 import useStreamClient from "../hooks/useStreamClient.js";
-import { StreamCall, StreamVideoClient } from "@stream-io/node-sdk";
+import { StreamVideo, StreamCall } from "@stream-io/video-react-sdk";
 import { getDifficultyBadgeClass } from "../lib/utils.js";
 import VideoCallUI from "../components/VideoCallUI.jsx";
+import CodeEditorPanel from "../components/CodeEditorPanel.jsx";
+import OutputPanel from "../components/OutputPanel.jsx";
 
 
 const SessionPage = () => {
@@ -37,7 +39,7 @@ const SessionPage = () => {
   const isParticipant = session?.participant?.clerkId === user?.id;
   const isHost = session?.host?.clerkId === user?.id;
 
-  const {call,channel,chatClient,isInitializingCall,streamClient } =useStreamClient(session,loadingSession,isHost,isParticipant)
+  const { call, channel, chatClient, isInitializingCall, streamClient } = useStreamClient({ session, loadingSession, isHost, isParticipant });
 
   // find the problem data based on session problem title
 
@@ -108,7 +110,7 @@ const SessionPage = () => {
     <div className="h-screen bg-base-100 flex flex-col">
       <Navbar />
 
-      <div className="flex-1">
+      <div className="flex-1 overflow-hidden">
         <PanelGroup direction="horizontal">
           {/* Left Panel - Code Editor & Problem Details */}
           <Panel defaultSize={50} minSize={30}>
@@ -140,7 +142,7 @@ const SessionPage = () => {
                         <span
                           className={`badge badge-lg ${getDifficultyBadgeClass(session?.difficulty)}`}
                         >
-                          {session?.difficulty.slice(0,1).toUpperCase() + session?difficulty.slice(1) || "Easy"}
+                          {session?.difficulty ? session.difficulty.slice(0,1).toUpperCase() + session.difficulty.slice(1) : "Easy"}
                         </span>
                         {isHost && session?.status === "active" && (
                           <button

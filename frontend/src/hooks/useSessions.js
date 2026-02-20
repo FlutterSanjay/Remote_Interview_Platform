@@ -25,7 +25,7 @@ export const useActiveSessions = () => {
 export const useMyRecentSessions = () => {
   const result = useQuery({
     queryKey: ["myRecentSessions"],
-    queryFn: sessionApi.getMyRecentSession,
+    queryFn: sessionApi.getMyRecentSessions,
   });
 
   return result;
@@ -48,7 +48,7 @@ export const useJoinSession = () => {
     mutationFn: sessionApi.joinSession,
     onSuccess: () => toast.success("Joined session successfully!"),
     onError: (e) =>
-      toast.success(e.response?.data?.message || " session successfully!"),
+      toast.error(e.response?.data?.message || "Failed to join session"),
   });
 
   return result;
@@ -60,7 +60,7 @@ export const useEndSession = () => {
     mutationFn: sessionApi.endSession,
     onSuccess: () => toast.success("Session End successfully!"),
     onError: (e) =>
-      toast.success(e.response?.data?.message || " session successfully!"),
+      toast.error(e.response?.data?.message || "Failed to end session"),
   });
 
   return result;

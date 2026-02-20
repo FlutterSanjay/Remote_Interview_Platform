@@ -73,7 +73,7 @@ const ActiveSessions = ({ sessions, isLoading, isUserInSession }) => {
                         <div className="flex items-center gap-1.5">
                           <CrownIcon className="size-4" />
                           <span className="font-medium">
-                            {sessions.host?.name}
+                            {session.host?.name}
                           </span>
                         </div>
                         <div className="flex items-center gap-1.5">

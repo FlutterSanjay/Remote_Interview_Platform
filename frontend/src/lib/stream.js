@@ -1,10 +1,10 @@
-import { StreamVideoClient } from "@stream-io/node-sdk";
+import { StreamVideoClient } from "@stream-io/video-react-sdk";
 
 const apiKey = import.meta.env.VITE_STREAM_API_KEY;
 
 let client = null;
 
-export const initalizeStreamClient = async (user, token) => {
+export const initializeStreamClient = async (user, token) => {
   // if client exists with same user instead of creating again return it
   if (client && client?.user?.id === user.id) return client;
 

@@ -72,7 +72,7 @@ const DashboardPage = () => {
               isUserInSession={isUserInSession}
             />
           </div>
-          <RecentSessions />
+          <RecentSessions sessions={recentSessions} isLoading={loadingRecentSessions} />
         </div>
       </div>
       <CreateSessionModal
