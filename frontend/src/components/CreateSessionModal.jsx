@@ -72,12 +72,12 @@ const CreateSessionModal = ({
             Cancel
           </button>
           <button
-            className="btn tbn-primary gap-2"
+            className="btn btn-primary gap-2"
             onClick={onCreateRoom}
             disabled={isCreating || !roomConfig.problem}
           >
             {isCreating ? (
-              Code2Icon(<LoaderIcon className="size-5 animate-spin" />)
+              <LoaderIcon className="size-5 animate-spin" />
             ) : (
               <PlusIcon className="size-5" />
             )}

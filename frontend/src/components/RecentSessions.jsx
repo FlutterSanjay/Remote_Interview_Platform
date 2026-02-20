@@ -29,7 +29,7 @@ function RecentSessions({ sessions = [], isLoading }) {
                 session, // 🔹 FIXED sessions
               ) => (
                 <div
-                  key={session.id}
+                  key={session._id}
                   className={`card relative ${
                     session.status === "active"
                       ? "bg-success/10 border-success/30 hover:border-success/60"
