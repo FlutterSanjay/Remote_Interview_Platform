@@ -5,7 +5,7 @@ import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 import {
   useEndSession,
   useJoinSession,
-  useSessionById,
+  useSessionsById,
 } from "../hooks/useSessions.js";
 import { PROBLEMS } from "../data/problem.js";
 import { executeCode } from "../lib/piston";
@@ -30,7 +30,7 @@ const SessionPage = () => {
     data: sessionData,
     isLoading: loadingSession,
     refetch,
-  } = useSessionById(id);
+  } = useSessionsById(id);
 
   const joinSessionMutation = useJoinSession();
   const endSessionMutation = useEndSession();
