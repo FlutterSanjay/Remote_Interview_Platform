@@ -20,7 +20,7 @@ app.use(clerkMiddleware()); // this add auth field to request object: req.auth()
 
 app.use("/api/inngest", serve({ client: inngest, functions }));
 app.use("/api/chat", chatRoutes);
-app.use("/api/session", sessionRoutes);
+app.use("/api/sessions", sessionRoutes);
 
 app.get("/health", (req, res) => {
   req.auth;
