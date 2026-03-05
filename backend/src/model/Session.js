@@ -4,22 +4,21 @@ const SessionSchema = new mongoose.Schema(
   {
     problem: {
       type: String,
-      require: true,
+      required: true,
     },
     difficulty: {
       type: String,
       enum: ["easy", "medium", "hard"],
-      require: true,
+      required: true,
     },
     host: {
       type: mongoose.Schema.Types.ObjectId,
-      require: true,
+      required: true,
       ref: "User",
     },
     participant: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      require: true,
     },
     status: {
       type: String,
