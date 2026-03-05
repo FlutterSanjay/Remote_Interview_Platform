@@ -29,10 +29,14 @@ const syncUser = inngest.createFunction(
       profileImage: image_url,
     };
 
-    console.log("Saving user to MongoDB:", newUser);
+    console.log("Upserting user to MongoDB:", newUser);
 
-    await User.create(newUser);
-    console.log("User saved to MongoDB successfully");
+    await User.findOneAndUpdate(
+      { clerkId: id },
+      { $set: newUser },
+      { upsert: true, new: true }
+    );
+    console.log("User upserted to MongoDB successfully");
 
     await upsertStreamUser({
       id: newUser.clerkId.toString(),

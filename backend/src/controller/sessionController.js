@@ -45,8 +45,9 @@ const createSession = async (req, res) => {
       sessionId: session._id,
     });
   } catch (e) {
-    console.error("Error creating session:", e);
-    res.status(500).json({ message: "Internal Server Error" });
+    console.error("🔥 Error creating session:", e.message || e);
+    console.error(e.stack);
+    res.status(500).json({ message: "Internal Server Error", error: e.message });
   }
 };
 
@@ -62,8 +63,9 @@ const getActiveSession = async (_, res) => {
       sessions,
     });
   } catch (e) {
-    console.error("Error fetching active session:", e);
-    res.status(500).json({ message: "Internal Server Error" });
+    console.error("🔥 Error fetching active session:", e.message || e);
+    console.error(e.stack);
+    res.status(500).json({ message: "Internal Server Error", error: e.message });
   }
 };
 
@@ -79,8 +81,9 @@ const getMyRecentSessions = async (req, res) => {
 
     res.status(200).json({ recentSession });
   } catch (e) {
-    console.log("Error in getMyRecentSessions controller :", e.message);
-    res.status(500).json({ message: "Internal Server Error" });
+    console.error("🔥 Error in getMyRecentSessions controller :", e.message || e);
+    console.error(e.stack);
+    res.status(500).json({ message: "Internal Server Error", error: e.message });
   }
 };
 
@@ -97,8 +100,9 @@ const getSessionById = async (req, res) => {
     }
     res.status(200).json({ session });
   } catch (error) {
-    console.log("Error in getSessionById controller :", error.message);
-    res.status(500).json({ message: "Internal Server Error" });
+    console.error("🔥 Error in getSessionById controller :", error.message || error);
+    console.error(error.stack);
+    res.status(500).json({ message: "Internal Server Error", error: error.message });
   }
 };
 
@@ -140,8 +144,9 @@ const joinSession = async (req, res) => {
 
     res.status(200).json({ session });
   } catch (error) {
-    console.log("Error in joinSession controller :", error.message);
-    res.status(500).json({ message: "Internal Server Error" });
+    console.error("🔥 Error in joinSession controller :", error.message || error);
+    console.error(error.stack);
+    res.status(500).json({ message: "Internal Server Error", error: error.message });
   }
 };
 
@@ -178,8 +183,9 @@ const endSession = async (req, res) => {
 
     res.status(200).json({ session, message: "Session ended successfully" });
   } catch (error) {
-    console.log("Error in endSession controller :", error.message);
-    res.status(500).json({ message: "Internal Server Error" });
+    console.error("🔥 Error in endSession controller :", error.message || error);
+    console.error(error.stack);
+    res.status(500).json({ message: "Internal Server Error", error: error.message });
   }
 };
 
